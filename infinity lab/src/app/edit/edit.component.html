@@ -1,0 +1,46 @@
+
+<h1> Edit Interfaces </h1>
+<form #f="ngForm" (ngSubmit)="submit(f.value)">
+    <div class="form-group">
+      <label for="interface">Interface</label>
+      <input 
+          id="interface" class="form-control" tyep="text" required 
+          #interface="ngModel" ngModel name="interface" />
+      <div *ngIf="interface.touched && interface.invalid"> 
+        <small style="color:red"><i>* Interface field is required</i></small>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="ip">IP:</label>
+      <input 
+          id="ip" class="form-control" tyep="text" required 
+          #ip="ngModel" ngModel name="ip"/>
+      <div *ngIf="ip.touched && ip.invalid"> 
+        <small style="color:red"><i>* ID field is required</i></small>
+      </div>
+    </div>
+    <button class="btn btn-primary" [disabled]="!f.valid">Add</button>
+  </form>
+  
+  <hr>
+  
+  <table class="table table-bordered">
+      <thead>
+          <tr>
+              <th>SR No</th><th>Interface</th><th>IP</th><th>Action</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let user of users; index as i">
+              <td>{{ i+1 }}</td> <td>{{ user.name }}</td> <td>{{ user.email }}</td>
+              <td>
+                <a [routerLink]="['/not-found']">
+                  <button class="btn btn-primary"> <i class="fa fa-edit"></i> </button> 
+                </a>
+                <button class="btn btn-primary" (click)="delete(user)"> <i class="fa fa-remove"></i> </button>       
+              </td>
+          </tr>
+      </tbody>
+  </table>    
+  
+  <button class="btn btn-primary" (click)="save()">Save</button>

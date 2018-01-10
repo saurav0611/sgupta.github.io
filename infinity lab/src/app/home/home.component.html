@@ -1,0 +1,48 @@
+
+<form #f="ngForm" (ngSubmit)="submit(f.value)">
+  <div class="form-group">
+    <label for="hostName">Hostname:</label>
+    <input 
+        id="hostName" class="form-control" tyep="text" required 
+        #hostName="ngModel" ngModel name="hostName" />
+    <div *ngIf="hostName.touched && hostName.invalid"> 
+      <small style="color:red"><i>* HostName field is required</i></small>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="loopBack">Loopback:</label>
+    <input 
+        id="loopBack" class="form-control" tyep="text" required 
+        #loopBack="ngModel" ngModel name="loopBack"/>
+    <div *ngIf="loopBack.touched && loopBack.invalid"> 
+      <small style="color:red"><i>* Loopback field is required</i></small>
+    </div>
+  </div>
+  <button class="btn btn-primary" [disabled]="!f.valid">Add</button>
+</form>
+
+<hr>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>SR No</th><th>Hostname</th><th>Loopback</th><th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users; index as i">
+            <td>{{ i+1 }}</td> <td>{{ user.name }}</td> <td>{{ user.email }}</td>
+            <td>
+              <a [routerLink]="['/not-found']">
+                <button class="btn btn-primary"> <i class="fa fa-edit"></i> </button> 
+              </a>
+              <button class="btn btn-primary" (click)="delete(user)"> <i class="fa fa-remove"></i> </button>    
+              <a [routerLink]="['/edit']">
+                <button type="button" class="btn btn-primary"> 
+                  <i class="fa fa-check-circle-o"></i> 
+                </button> 
+              </a>
+            </td>
+        </tr>
+    </tbody>
+</table>        
